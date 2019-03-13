@@ -4,6 +4,7 @@
 
 #include "Object.h"
 #include "Renderer.h"
+#include "InputManager.h"
 using namespace std;
 
 int main() {
@@ -12,14 +13,15 @@ int main() {
 	Object player("^6^", "player", { 0,0,0 }, { 0,0,0 }, { 100,100,100 });
 	Object enemy(">0<", "enemy", { 20,0,0 }, { 0,0,0 }, { 100,100,100 });
 	//게임 루프 구성 
-	while (1/*escape*/) {
+	while (true) {
 		renderer.Clear();
-		//입력
+		if (InputManager::GetKeyDown(KeyCode::Escape)) break;//입력
 		//오브젝트들 업뎃해야할 것 다 업데이트
-		player.Draw();
+		player.Update();
 		enemy.Draw();
 		renderer.Render();
-		Sleep(66);
+		Sleep(1000);
+		InputManager::endOfFrame();
 	}
 
 	//Decommissioning

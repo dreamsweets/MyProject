@@ -20,7 +20,9 @@ class Object {
 public:
 	Object(std::string shape, std::string name, Vector3 position, Vector3 rotation, Vector3 scale);
 
+	virtual void Update();
 	void Draw();
+	void Move();
 };
 
 #endif // !_OBJECT_H_
