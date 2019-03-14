@@ -20,7 +20,7 @@ int main() {
 		player.Update();
 		enemy.Draw();
 		renderer.Render();
-		Sleep(1000);
+		Sleep(66);
 		InputManager::endOfFrame();
 	}
 
