@@ -4,7 +4,11 @@
 #include "InputManager.h"
 
 
-Component::Component(const GameObject* target) : target(target)
+Component::Component() : target(nullptr)
+{
+}
+
+Component::Component(GameObject * target) : target(target)
 {
 }
 
@@ -12,8 +16,8 @@ Component::~Component()
 {
 }
 
-MeshRenderer::MeshRenderer(const GameObject * target, string mesh):
-	Component(target), mesh(mesh)
+MeshRenderer::MeshRenderer(const string& mesh):
+	mesh(mesh)
 {
 }
 
@@ -27,23 +31,31 @@ void MeshRenderer::Update()
 	Draw();
 }
 
-Transform::Transform(const GameObject* target) : 
-	Component(target),
+Transform::Transform() : 
 	position({0,0,0}),
 	rotation({0,0,0}),
 	scale({100,100,100})
 {
 }
 
-Transform::Transform(const GameObject * target, Vector3 position) :
-	Component(target),
+Transform::Transform(GameObject * target) : Component(target)
+{
+}
+
+Transform::Transform(Vector3& position) :
 	position(position),
 	rotation({ 0,0,0 }),
 	scale({ 100,100,100 })
 {
 }
 
-MoveManager::MoveManager(const GameObject * target) : Component(target)
+Transform::Transform(GameObject * target, Vector3 & position)
+	: Component(target),
+	position(position)
+{
+}
+
+MoveManager::MoveManager()
 {
 }
 

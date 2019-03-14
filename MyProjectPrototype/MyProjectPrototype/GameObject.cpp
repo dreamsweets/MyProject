@@ -34,6 +34,7 @@ void GameObject::Update()
 
 void GameObject::AddComponent(Component * component)
 {
+	component->target = this;
 	components.push_back(component);
 }
 

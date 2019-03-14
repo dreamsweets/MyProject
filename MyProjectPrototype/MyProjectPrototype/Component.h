@@ -9,9 +9,12 @@ using namespace std;
 class GameObject;
 class Component
 {
+	friend class GameObject;
+protected:
+	GameObject* target;
 public:
-	const GameObject* target;
-	Component(const GameObject* target);
+	Component();
+	Component(GameObject* target);
 	virtual ~Component();
 	virtual void Start() {}
 	virtual void Update() {}
@@ -19,8 +22,10 @@ public:
 
 class Transform : public Component {
 public:
-	Transform(const GameObject* target);
-	Transform(const GameObject* target, Vector3 position);
+	Transform();
+	Transform(GameObject* target);
+	Transform(Vector3& position);
+	Transform(GameObject* target, Vector3& position);
 	Vector3 position;
 	Vector3 rotation;
 	Vector3 scale;
@@ -29,14 +34,14 @@ public:
 class MeshRenderer : public Component {
 public:
 	string mesh;
-	MeshRenderer(const GameObject* target, string mesh);
+	MeshRenderer(const string& mesh);
 	void Draw();
 	virtual void Update();
 };
 
 class MoveManager : public Component {
 	public:
-		MoveManager(const GameObject* target);
+		MoveManager();
 		virtual void Update();
 
 };

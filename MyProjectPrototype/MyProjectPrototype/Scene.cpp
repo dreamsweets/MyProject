@@ -18,9 +18,9 @@ Scene::Scene(const string& name) : name(name)
 	//컴포넌트를 추가해야 하는데, 이 역시 인터페이스가 없으므로 여기서 직접 코드로 붙여줘야 할듯
 	//게임오브젝트에 name을 추가했으니 name으로 원하는 오브젝트를 검색해서 거기에 추가하는 방식으로 해보자.
 	//해보니까 해당 오브젝트를 계속 사용해야하는데 할 때마다 검색해서 쓰는 건 좀 오바인듯.
-	player->AddComponent(new MeshRenderer(player, "^3^"));
-	player->AddComponent(new MoveManager(player));
-	enemy->AddComponent(new MeshRenderer(enemy, ">0<"));
+	player->AddComponent(new MeshRenderer("^3^"));
+	player->AddComponent(new MoveManager());
+	enemy->AddComponent(new MeshRenderer(">0<"));
 }
 
 
