@@ -28,7 +28,7 @@ class InputManager {
 
 public:
 	InputManager() {}
-	static void endOfFrame();
+	static void EndOfFrame();
 	static bool GetKeyDown(KeyCode key);
 
 };

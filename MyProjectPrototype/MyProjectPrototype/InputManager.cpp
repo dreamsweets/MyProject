@@ -21,7 +21,7 @@ map<KeyCode, pair<int, int>> InputManager::ketCodeTable = {
 	{ KeyCode::Space, { 0, 32 }}
 
 };
-void InputManager::endOfFrame()
+void InputManager::EndOfFrame()
 {
 	isOverlap = false;
 	major = -1;
