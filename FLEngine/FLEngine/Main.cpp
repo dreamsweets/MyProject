@@ -11,5 +11,7 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpszCmdLine, int nCmdShow)
 {
-	CoreEngine* coreEngine = new CoreEngine;
+	CoreEngine::getInstance().Run();
+
+	return 0;
 }
