@@ -1,6 +1,8 @@
 #include "WindowSystem.h"
 
 
+
+
 WindowSystem::WindowSystem()
 {
 }
@@ -30,7 +32,7 @@ WindowSystem::~WindowSystem()
 	return;
 }
 
-void WindowSystem::InitializeWindows(int& screenWidth, int& screenHeight)
+bool WindowSystem::InitializeWindows(int& screenWidth, int& screenHeight)
 {
 	WNDCLASSEX wc;
 	DEVMODE dmScreenSettings;
@@ -85,12 +87,12 @@ void WindowSystem::InitializeWindows(int& screenWidth, int& screenHeight)
 		posY = (GetSystemMetrics(SM_CYSCREEN) - screenHeight) / 2;
 	}
 
-	// Create the window with the screen settings and get the handle to it.
+	// 스크린 세팅에 따라서 윈도우 생성하고 핸들값을 받아온다.
 	hwnd = CreateWindowEx(WS_EX_APPWINDOW, applicationName, applicationName,
-		WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_POPUP,
+		WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_POPUP | WS_OVERLAPPEDWINDOW,
 		posX, posY, screenWidth, screenHeight, NULL, NULL, hinstance, NULL);
 
-	// Bring the window up on the screen and set it as main focus.
+	// 화면 상에 창을 띄우고 활성화 상태로 놓는다.
 	ShowWindow(hwnd, SW_SHOW);
 	SetForegroundWindow(hwnd);
 	SetFocus(hwnd);
@@ -98,36 +100,10 @@ void WindowSystem::InitializeWindows(int& screenWidth, int& screenHeight)
 	//마우스커서 표시여부
 	ShowCursor(true);
 
-	return;
+	return true;
 }
 
-HWND & WindowSystem::getHWND()
+const HWND& WindowSystem::GetHWND()
 {
 	return hwnd;
-}
-
-LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
-{
-	switch (umessage)
-	{
-		// Check if the window is being destroyed.
-	case WM_DESTROY:
-	{
-		PostQuitMessage(0);
-		return 0;
-	}
-
-	// Check if the window is being closed.
-	case WM_CLOSE:
-	{
-		PostQuitMessage(0);
-		return 0;
-	}
-
-	// All other messages pass to the message handler in the system class.
-	default:
-	{
-		return CoreEngine::getInstance().MessageHandler(hwnd, umessage, wparam, lparam);
-	}
-	}
 }

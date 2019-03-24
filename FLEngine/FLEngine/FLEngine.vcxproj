@@ -104,6 +104,8 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -149,10 +151,14 @@
   <ItemGroup>
     <ClCompile Include="ComponentBase.cpp" />
     <ClCompile Include="CoreEngine.cpp" />
+    <ClCompile Include="D3DClass.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GraphicsSystem.cpp" />
     <ClCompile Include="InputSystem.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Main.cpp">
+      <EnableFiberSafeOptimizations Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</EnableFiberSafeOptimizations>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</WholeProgramOptimization>
+    </ClCompile>
     <ClCompile Include="Precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -165,6 +171,7 @@
   <ItemGroup>
     <ClInclude Include="ComponentBase.h" />
     <ClInclude Include="CoreEngine.h" />
+    <ClInclude Include="D3DClass.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GraphicsSystem.h" />
     <ClInclude Include="InputSystem.h" />

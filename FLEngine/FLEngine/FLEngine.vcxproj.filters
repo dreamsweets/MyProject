@@ -60,6 +60,9 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="D3DClass.cpp">
+      <Filter>System\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DClass.h">
+      <Filter>System\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
