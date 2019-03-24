@@ -18,8 +18,10 @@ class WindowSystem :
 public:
 	WindowSystem();
 	~WindowSystem();
-	bool InitializeWindows(int&, int&);
-	const HWND& GetHWND();
+	void InitializeWindows(int&, int&);
+
+	//HWND값 반환하는 함수
+	HWND& getHWND();
 private:
 	LPCWSTR applicationName;
 	HINSTANCE hinstance;
@@ -28,3 +30,4 @@ private:
 
 static WindowSystem * ApplicationHandle = nullptr;
 
+static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);

@@ -3,6 +3,6 @@ class System
 {
 public:
 	System();
-	virtual ~System();
+	~System();
 };
 
