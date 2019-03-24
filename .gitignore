@@ -1,3 +1,4 @@
 
 *.opendb
 FLEngine/FLEngine/x64/Debug/FLEngine.Build.CppClean.log
+ignore-dir/D:\Git Repository\MyProject\FLEngine\.vs\
