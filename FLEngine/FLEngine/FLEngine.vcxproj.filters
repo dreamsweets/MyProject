@@ -19,9 +19,6 @@
     <Filter Include="System\Input">
       <UniqueIdentifier>{eecd7c3f-7144-4028-981a-91e1bec19616}</UniqueIdentifier>
     </Filter>
-    <Filter Include="System\Window">
-      <UniqueIdentifier>{6903453d-21f3-44f1-808f-fcb6bada1517}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Precompiled">
       <UniqueIdentifier>{95d0332b-bf3c-4ff5-af4a-90cbd649f8e9}</UniqueIdentifier>
     </Filter>
@@ -48,12 +45,6 @@
     <ClCompile Include="InputSystem.cpp">
       <Filter>System\Input</Filter>
     </ClCompile>
-    <ClCompile Include="WindowSystem.cpp">
-      <Filter>System\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="Precompiled.cpp">
-      <Filter>Precompiled</Filter>
-    </ClCompile>
     <ClCompile Include="System.cpp">
       <Filter>Precompiled</Filter>
     </ClCompile>
@@ -77,17 +68,14 @@
     <ClInclude Include="InputSystem.h">
       <Filter>System\Input</Filter>
     </ClInclude>
-    <ClInclude Include="WindowSystem.h">
-      <Filter>System\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Precompiled.h">
-      <Filter>Precompiled</Filter>
-    </ClInclude>
     <ClInclude Include="System.h">
       <Filter>Precompiled</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Precompiled</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

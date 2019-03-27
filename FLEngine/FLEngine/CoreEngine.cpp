@@ -1,6 +1,6 @@
 //½Ì±ÛÅæ ÆÐÅÏ ±¸ÇöÀÌÀ¯ : 	return CoreEngine::getInstance()->MessageHandler(hwnd, umessage, wparam, lparam); ÀÌÁþÇÏ·Á°í ¸¸µê.
 #include "CoreEngine.h"
-#include "Precompiled.h"
+#include "stdafx.h"
 #include "WindowSystem.h"
 #include "GraphicsSystem.h"
 #include "InputSystem.h"
@@ -19,6 +19,7 @@ CoreEngine::CoreEngine() :
 	input(nullptr),
 	graphics(nullptr)
 {
+	ApplicationHandle = this;
 	int screenWidth = 0, screenHeight = 0;
 	window = new WindowSystem;
 	window->InitializeWindows(screenWidth, screenHeight);
@@ -107,3 +108,4 @@ LRESULT CALLBACK CoreEngine::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam,
 	}
 	}
 }
+

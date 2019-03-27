@@ -1,5 +1,4 @@
 #pragma once
-#include "Precompiled.h"
 #include "System.h"
 
 class InputSystem :
