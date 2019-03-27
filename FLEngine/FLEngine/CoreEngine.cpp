@@ -1,9 +1,8 @@
 //싱글톤 패턴 구현이유 : 	return CoreEngine::getInstance()->MessageHandler(hwnd, umessage, wparam, lparam); 이짓하려고 만듦.
 #include "CoreEngine.h"
-#include "stdafx.h"
-#include "WindowSystem.h"
-#include "GraphicsSystem.h"
-#include "InputSystem.h"
+#include "Window.h"
+#include "Graphics.h"
+#include "Input.h"
 
 CoreEngine* CoreEngine::coreEngine = nullptr;
 
@@ -19,10 +18,9 @@ CoreEngine::CoreEngine() :
 	input(nullptr),
 	graphics(nullptr)
 {
-	ApplicationHandle = this;
-	int screenWidth = 0, screenHeight = 0;
-	window = new WindowSystem;
-	window->InitializeWindows(screenWidth, screenHeight);
+	window = new Window;
+	input = new Input;
+	graphics = new Graphics;
 }
 
 bool CoreEngine::Frame()
@@ -39,17 +37,15 @@ bool CoreEngine::Frame()
 //Shutdown()
 CoreEngine::~CoreEngine()
 {
-	if (window) { 
-		delete window;
-		window = nullptr;
-	}
 }
 
 void CoreEngine::Run()
 {
-	MSG msg;
+	MSG msg = { 0 };
 	bool done, result;
 
+	D3DDesc desc;
+	D3D::SetDesc(desc);
 	//메세지 구조체 초기화.
 	ZeroMemory(&msg, sizeof(MSG));
 
@@ -72,19 +68,32 @@ void CoreEngine::Run()
 		{
 			//종료 메시지 외에는 frame 처리를 한다.
 			result = Frame();
-			if (!result)
-			{
-				done = true;
-			}
+			if (!result) done = true;
 		}
 	}
-
 	return;
+}
+
+void CoreEngine::Shutdown()
+{
+	SAFE_DELETE(graphics);
+	SAFE_DELETE(input);
+	SAFE_DELETE(window);
 }
 
 LRESULT CALLBACK CoreEngine::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam) {
 	switch (umsg)
 	{
+	case WM_SIZE :
+		{
+		//ImGui::Invalidate();
+			float width = (float)LOWORD(lparam);
+			float height = (float)HIWORD(lparam);
+
+			if (D3D::Get() != NULL)
+				D3D::Get()->ResizeScreen(width, height);
+		}
+
 		//키보드상의 키가 눌렸는지를 확인한다.
 	case WM_KEYDOWN:
 	{
@@ -101,11 +110,57 @@ LRESULT CALLBACK CoreEngine::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam,
 		return 0;
 	}
 
+	case WM_CLOSE: case WM_DESTROY:
+	{
+		PostQuitMessage(0);
+		return 0;
+	}
+
 	//그 외 다른 모든 메시지는 default 메시지 처리기로 전달한다.
 	default:
 	{
 		return DefWindowProc(hwnd, umsg, wparam, lparam);
 	}
 	}
+}
+
+LRESULT CoreEngine::WinProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_SIZE:
+	{
+		//ImGui::Invalidate();
+		{
+			float width = (float)LOWORD(lParam);
+			float height = (float)HIWORD(lParam);
+
+			if (D3D::Get() != NULL)
+				D3D::Get()->ResizeScreen(width, height);
+		}
+		//ImGui::Validate();
+	}
+	case WM_CLOSE:case WM_DESTROY:
+		{
+			PostQuitMessage(0);
+			return 0;
+		}
+
+		default:
+		{
+			return DefWindowProc(handle, message, wParam, lParam);
+		}
+	}
+
+}
+
+WNDCLASSEX CoreEngine::GetWNDCLASS()
+{
+	return wndClass;
+}
+
+void CoreEngine::SetWNDCLASS(WNDCLASSEX & wnd)
+{
+	wndClass = wnd;
 }
 

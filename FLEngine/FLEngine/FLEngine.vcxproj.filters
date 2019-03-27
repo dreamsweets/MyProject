@@ -25,25 +25,16 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{cae0e75d-276c-49e6-9344-6891f8a9eb44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System\Window">
+      <UniqueIdentifier>{fc4a2b0a-e456-408a-88d2-98fb18463885}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ComponentBase.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="CoreEngine.cpp">
       <Filter>CoreEngine</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>CoreEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsSystem.cpp">
-      <Filter>System\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="InputSystem.cpp">
-      <Filter>System\Input</Filter>
     </ClCompile>
     <ClCompile Include="System.cpp">
       <Filter>Precompiled</Filter>
@@ -51,22 +42,22 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="D3D.cpp">
+      <Filter>System\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>System\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>System\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>System\Window</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="ComponentBase.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="CoreEngine.h">
       <Filter>CoreEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsSystem.h">
-      <Filter>System\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="InputSystem.h">
-      <Filter>System\Input</Filter>
     </ClInclude>
     <ClInclude Include="System.h">
       <Filter>Precompiled</Filter>
@@ -76,6 +67,21 @@
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D.h">
+      <Filter>System\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>System\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>System\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>System\Window</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
