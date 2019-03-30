@@ -17,9 +17,8 @@ public:
 	void Run();
 	void Shutdown();
 	LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
-	LRESULT CALLBACK WinProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam);
-	static WNDCLASSEX GetWNDCLASS();
-	static void SetWNDCLASS(WNDCLASSEX&);
+	static LRESULT CALLBACK WinProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam);
+	void GetWndClass(WNDCLASSEX*);
 private:
 	CoreEngine();
 	~CoreEngine();

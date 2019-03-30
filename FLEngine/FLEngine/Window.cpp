@@ -1,5 +1,5 @@
 #include "Window.h"
-
+#include "D3D.h"
 
 //창 생성자 - D3Ddesc 받아와서 생성후 다시 D3Ddesc 초기화
 Window::Window()
@@ -8,7 +8,7 @@ Window::Window()
 	D3D::GetDesc(&desc);
 
 	WNDCLASSEX wndClass;
-	wndClass = CoreEngine::getInstance().GetWNDCLASS();
+	(CoreEngine::getInstance()).GetWndClass(&wndClass);
 
 	WORD wHr = RegisterClassEx(&wndClass);
 	//assert(wHr != 0);

@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "Graphics.h"
 #include "Input.h"
+#include "D3D.h"
 
 CoreEngine* CoreEngine::coreEngine = nullptr;
 
@@ -18,6 +19,21 @@ CoreEngine::CoreEngine() :
 	input(nullptr),
 	graphics(nullptr)
 {
+	D3DDesc desc;
+	D3D::GetDesc(&desc);
+	wndClass.cbClsExtra = 0;
+	wndClass.cbWndExtra = 0;
+	wndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wndClass.hIcon = LoadIcon(NULL, IDI_WINLOGO);
+	wndClass.hInstance = desc.Instance;
+	wndClass.lpfnWndProc = (WNDPROC)((CoreEngine::getInstance()).WinProc);
+	wndClass.lpszClassName = (LPCWSTR)(desc.AppName).c_str();
+	wndClass.lpszMenuName = NULL;
+	wndClass.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
+	wndClass.cbSize = sizeof(WNDCLASSEX);
+	wndClass.hIconSm = wndClass.hIcon;
+
 	window = new Window;
 	input = new Input;
 	graphics = new Graphics;
@@ -154,13 +170,9 @@ LRESULT CoreEngine::WinProc(HWND handle, UINT message, WPARAM wParam, LPARAM lPa
 
 }
 
-WNDCLASSEX CoreEngine::GetWNDCLASS()
+void CoreEngine::GetWndClass(WNDCLASSEX * wnd)
 {
-	return wndClass;
+	*wnd = wndClass;
 }
 
-void CoreEngine::SetWNDCLASS(WNDCLASSEX & wnd)
-{
-	wndClass = wnd;
-}
 

@@ -1,7 +1,6 @@
 #include "Graphics.h"
 
 
-
 Graphics::Graphics()
 	:	D3D (D3D::Get())
 {
@@ -21,8 +20,8 @@ bool Graphics::Frame()
 bool Graphics::Render()
 {
 	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
-
-	D3D->Clear();
+	Color color = { 0.5f, 0.5f, 0.5f, 1.0f };
+	D3D->BeginScene(color);
 
 	D3D->Present();
 	return true;

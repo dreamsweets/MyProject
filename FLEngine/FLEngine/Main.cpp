@@ -6,6 +6,7 @@
 //생성자, 소멸자 함수를 활용할 것인지, 아니면 Initialize와 Shutdown함수를 사용할 것인지...-> 일단 함수가 너무 많아지니까 머리아프다. 그냥 생성자 소멸자 쓰자.
 #include "stdafx.h"
 #include "CoreEngine.h"
+#include "D3D.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpszCmdLine, int nCmdShow)
@@ -19,21 +20,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	desc.Width = 1280;
 	desc.Height = 720;
 	D3D::SetDesc(desc);
-
-	WNDCLASSEX wndClass;
-	wndClass.cbClsExtra = 0;
-	wndClass.cbWndExtra = 0;
-	wndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-	wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wndClass.hIcon = LoadIcon(NULL, IDI_WINLOGO);
-	wndClass.hInstance = desc.Instance;
-	wndClass.lpfnWndProc = (WNDPROC)CoreEngine::getInstance().WinProc;
-	wndClass.lpszClassName = desc.AppName.c_str();
-	wndClass.lpszMenuName = NULL;
-	wndClass.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-	wndClass.cbSize = sizeof(WNDCLASSEX);
-	wndClass.hIconSm = wndClass.hIcon;
-	CoreEngine::SetWNDCLASS(wndClass);
 
 	CoreEngine::getInstance().Run();
 	return 0;

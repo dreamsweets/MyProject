@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "D3D.h"
 
 D3D* D3D::instance = nullptr;
@@ -300,22 +299,28 @@ void D3D::GetVideoCardInfo(char * cardName, int & memory)
 	strncpy(cardName, (char*)gpuDescription.c_str(), 128);
 	memory = (int)gpuMemorySize;;
 }
-void D3D::Clear(Color& color, ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* dsv)
+//void D3D::Clear(Color& color, ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* dsv)
+//{
+//
+//
+//	if (!rtv)
+//		rtv = renderTargetView;
+//
+//	if (!dsv)
+//		dsv = depthStencilView;
+//
+//
+//}
+bool D3D::BeginScene(Color &color)
 {
 	float _color[4];
 	_color[0] = color.r;
 	_color[1] = color.g;
 	_color[2] = color.b;
 	_color[3] = color.a;
-
-	if (!rtv)
-		rtv = renderTargetView;
-
-	if (!dsv)
-		dsv = depthStencilView;
-
-	deviceContext->ClearRenderTargetView(rtv, _color);
-	deviceContext->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH, 1, 0);
+	deviceContext->ClearRenderTargetView(renderTargetView, _color);
+	deviceContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1, 0);
+	return true;
 }
 void D3D::Present()
 {

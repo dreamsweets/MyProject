@@ -1,5 +1,13 @@
 #pragma once
 #include "stdafx.h"
+
+#pragma comment(lib,"dxgi.lib")
+#pragma comment(lib, "d3d11.lib")
+
+#include <dxgi.h>
+#include <d3dcommon.h>
+#include <d3d11.h>
+#include <DirectXMath.h>
 using namespace DirectX;
 
 const float SCREEN_DEPTH = 1000.0f;
@@ -44,8 +52,8 @@ public:
 
 	/*void SetRenderTarget(ID3D11RenderTargetView* rtv = NULL, ID3D11DepthStencilView* dsv = NULL);*/
 
-	void Clear(Color& color = { 0,0,0,0 }, ID3D11RenderTargetView * rtv = nullptr, ID3D11DepthStencilView * dsv = nullptr);
-
+	//void Clear(Color& color = { 0,0,0,0 }, ID3D11RenderTargetView * rtv = nullptr, ID3D11DepthStencilView * dsv = nullptr);
+	bool BeginScene(Color& color);
 	void Present();
 
 	void ResizeScreen(float width, float height);
