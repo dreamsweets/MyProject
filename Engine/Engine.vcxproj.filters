@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="System\CoreSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="System\D3D.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\Utils.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>PCH</Filter>
+    </ClCompile>
+    <ClCompile Include="System\GraphicsSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="System\InputSystem.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="System\CoreSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="System\D3D.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\Utils.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="System\GraphicsSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="System\InputSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="System">
+      <UniqueIdentifier>{e8592a6e-879f-479a-b470-0752782070f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{5c457750-018d-45d4-a8ef-af1219f20495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PCH">
+      <UniqueIdentifier>{e0f5628c-332a-4d06-a1c6-c1f2b61f7be0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

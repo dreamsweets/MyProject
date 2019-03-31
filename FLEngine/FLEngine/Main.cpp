@@ -12,7 +12,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpszCmdLine, int nCmdShow)
 {
 	D3DDesc desc;
-	desc.AppName = L"Frontline Engine";
+	desc.AppName = L"FL Engine";
 	desc.Instance = hInstance;
 	desc.bFullScreen = false;
 	desc.bVsync = false;
