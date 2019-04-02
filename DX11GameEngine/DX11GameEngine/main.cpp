@@ -1,4 +1,4 @@
-#include <Windows.h>
+#include "ErrorLogger.h"
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"DirectXTK.lib")
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -6,5 +6,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_ LPWSTR lpCmdLine,
 	_In_ int nCmdShow)
 {
+	ErrorLogger::Log(S_OK, "Test Message");
 	return 0;
 }
