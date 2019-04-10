@@ -51,7 +51,7 @@ void Engine::Update()
 			outmsg += std::to_string(me.GetPosX());
 			outmsg += ", Y: ";
 			outmsg += std::to_string(me.GetPosY());
-			outmsg += "/n";
+			outmsg += '\n';
 			OutputDebugStringA(outmsg.c_str());
 		}
 	}
