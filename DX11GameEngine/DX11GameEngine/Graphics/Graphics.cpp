@@ -5,6 +5,9 @@ bool Graphics::Initialize(HWND hwnd, int width, int height)
 	if (!InitializeDirectX(hwnd, width, height))
 		return false;
 
+	if (!InitializeShaders())
+		return false;
+
 	return true;
 }
 
@@ -12,16 +15,16 @@ void Graphics::RenderFrame()
 {
 	float bgcolor[] = { 0.0f, 0.0f, 1.0f, 1.0f };
 	this->deviceContext->ClearRenderTargetView(this->renderTargetView.Get(), bgcolor);
-	this->swapchain->Present(0, NULL);
+	this->swapchain->Present(1, NULL);
 }
 
 bool Graphics::InitializeDirectX(HWND hwnd, int width, int height)
 {
 	std::vector<AdapterData> adapters = AdapterReader::GetAdapters();
-	
+
 	if (adapters.size() < 1)
 	{
-		ErrorLogger::Log("NO DXGI Adapers found.");
+		ErrorLogger::Log("No IDXGI Adapters found.");
 		return false;
 	}
 
@@ -47,7 +50,6 @@ bool Graphics::InitializeDirectX(HWND hwnd, int width, int height)
 	scd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 	HRESULT hr;
-
 	hr = D3D11CreateDeviceAndSwapChain(adapters[0].pAdapter, //IDXGI Adapter
 		D3D_DRIVER_TYPE_UNKNOWN,
 		NULL, //FOR SOFTWARE DRIVER TYPE
@@ -63,7 +65,7 @@ bool Graphics::InitializeDirectX(HWND hwnd, int width, int height)
 
 	if (FAILED(hr))
 	{
-		ErrorLogger::Log(hr, "Failed to create device and swapChain.");
+		ErrorLogger::Log(hr, "Failed to create device and swapchain.");
 		return false;
 	}
 
@@ -83,5 +85,29 @@ bool Graphics::InitializeDirectX(HWND hwnd, int width, int height)
 	}
 
 	this->deviceContext->OMSetRenderTargets(1, this->renderTargetView.GetAddressOf(), NULL);
+
+	return true;
+}
+
+bool Graphics::InitializeShaders()
+{
+
+	if (!vertexshader.Initialize(this->device, L"x64\\Debug\\vertexshader.cso"))
+		return false;
+
+	D3D11_INPUT_ELEMENT_DESC layout[] =
+	{
+		{"POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
+	};
+
+	UINT numElements = ARRAYSIZE(layout);
+
+	HRESULT hr = this->device->CreateInputLayout(layout, numElements, this->vertexshader.GetBuffer()->GetBufferPointer(), this->vertexshader.GetBuffer()->GetBufferSize(), this->inputLayout.GetAddressOf());
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to create input layout.");
+		return false;
+	}
+
 	return true;
 }
