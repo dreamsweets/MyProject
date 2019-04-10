@@ -9,6 +9,7 @@ public:
 	bool Initialize(WindowContainer* pWindowContainer, HINSTANCE hInstance, std::string window_title, std::string window_class, int width, int height);
 	bool ProcessMessages();
 	~RenderWindow();
+	HWND GetHWND() const;
 private:
 	void RegisterWindowClass();
 	HWND handle = NULL; //Handle to this window

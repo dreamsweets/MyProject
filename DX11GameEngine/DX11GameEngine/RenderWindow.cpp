@@ -129,3 +129,8 @@ RenderWindow::~RenderWindow()
 		DestroyWindow(handle);
 	}
 }
+
+HWND RenderWindow::GetHWND() const
+{
+	return this->handle;
+}
