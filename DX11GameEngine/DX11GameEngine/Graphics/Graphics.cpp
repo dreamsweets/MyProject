@@ -8,6 +8,13 @@ bool Graphics::Initialize(HWND hwnd, int width, int height)
 	return true;
 }
 
+void Graphics::RenderFrame()
+{
+	float bgcolor[] = { 0.0f, 0.0f, 1.0f, 1.0f };
+	this->deviceContext->ClearRenderTargetView(this->renderTargetView.Get(), bgcolor);
+	this->swapchain->Present(0, NULL);
+}
+
 bool Graphics::InitializeDirectX(HWND hwnd, int width, int height)
 {
 	std::vector<AdapterData> adapters = AdapterReader::GetAdapters();
@@ -54,5 +61,27 @@ bool Graphics::InitializeDirectX(HWND hwnd, int width, int height)
 		NULL, //Supported feature level
 		this->deviceContext.GetAddressOf()); //Device Context Address
 
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to create device and swapChain.");
+		return false;
+	}
+
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
+	hr = this->swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(backBuffer.GetAddressOf()));
+	if (FAILED(hr)) //If error occurred
+	{
+		ErrorLogger::Log(hr, "GetBuffer Failed.");
+		return false;
+	}
+
+	hr = this->device->CreateRenderTargetView(backBuffer.Get(), NULL, this->renderTargetView.GetAddressOf());
+	if (FAILED(hr)) //If error occurred
+	{
+		ErrorLogger::Log(hr, "Failed to create render target view.");
+		return false;
+	}
+
+	this->deviceContext->OMSetRenderTargets(1, this->renderTargetView.GetAddressOf(), NULL);
 	return true;
 }
