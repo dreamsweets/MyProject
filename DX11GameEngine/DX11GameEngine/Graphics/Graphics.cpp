@@ -7,7 +7,8 @@ bool Graphics::Initialize(HWND hwnd, int width, int height)
 
 	if (!InitializeShaders())
 		return false;
-
+	if (!InitializeScene())
+		return false;
 	return true;
 }
 
@@ -102,26 +103,6 @@ bool Graphics::InitializeDirectX(HWND hwnd, int width, int height)
 
 bool Graphics::InitializeShaders()
 {
-
-	std::wstring shaderfolder = L"";
-#pragma region DetermineShaderPath
-	if (IsDebuggerPresent() == TRUE)
-	{
-#ifdef _DEBUG //Debug Mode
-	#ifdef _WIN64 //x64
-			shaderfolder = L"x64\\Debug\\";
-	#else  //x86 (Win32)
-			shaderfolder = L"Debug\\";
-	#endif
-	#else //Release Mode
-	#ifdef _WIN64 //x64
-			shaderfolder = L"x64\\Release\\";
-	#else  //x86 (Win32)
-			shaderfolder = L"Release\\";
-	#endif
-#endif
-	}
-
 	D3D11_INPUT_ELEMENT_DESC layout[] =
 	{
 		{"POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
@@ -129,12 +110,42 @@ bool Graphics::InitializeShaders()
 
 	UINT numElements = ARRAYSIZE(layout);
 
-	if (!vertexshader.Initialize(this->device, shaderfolder + L"vertexshader.cso", layout, numElements))
+	if (!vertexshader.Initialize(this->device, L"x64\\Debug\\vertexshader.cso", layout, numElements))
 		return false;
 
-	if (!pixelshader.Initialize(this->device, shaderfolder + L"pixelshader.cso"))
+	if (!pixelshader.Initialize(this->device, L"x64\\Debug\\pixelshader.cso"))
 		return false;
 
+
+	return true;
+}
+
+bool Graphics::InitializeScene()
+{
+	Vertex v[] =
+	{
+		Vertex(0.0f, 0.0f),
+	};
+
+	D3D11_BUFFER_DESC vertexBufferDesc;
+	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
+
+	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	vertexBufferDesc.ByteWidth = sizeof(Vertex) * ARRAYSIZE(v);
+	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	vertexBufferDesc.CPUAccessFlags = 0;
+	vertexBufferDesc.MiscFlags = 0;
+
+	D3D11_SUBRESOURCE_DATA vertexBufferData;
+	ZeroMemory(&vertexBufferData, sizeof(vertexBufferData));
+	vertexBufferData.pSysMem = v;
+
+	HRESULT hr = this->device->CreateBuffer(&vertexBufferDesc, &vertexBufferData, this->vertexBuffer.GetAddressOf());
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to create vertex buffer.");
+		return false;
+	}
 
 	return true;
 }
