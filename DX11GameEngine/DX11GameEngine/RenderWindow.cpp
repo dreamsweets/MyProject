@@ -12,6 +12,7 @@ bool RenderWindow::Initialize(WindowContainer* pWindowContainer, HINSTANCE hInst
 
 	this->RegisterWindowClass();
 
+	//window 크기 설정
 	int centerScreenX = GetSystemMetrics(SM_CXSCREEN) / 2 - this->width / 2;
 	int centerScreenY = GetSystemMetrics(SM_CYSCREEN) / 2 - this->height / 2;
 	RECT wr; //화면 크기
@@ -20,6 +21,7 @@ bool RenderWindow::Initialize(WindowContainer* pWindowContainer, HINSTANCE hInst
 	wr.right = wr.left + this->width;
 	wr.bottom = wr.top + this->height;
 	AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE);
+	
 	this->handle = CreateWindowEx(0,
 		this->window_class_wide.c_str(),
 		this->window_class_wide.c_str(),
