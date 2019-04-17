@@ -14,7 +14,7 @@ bool Graphics::Initialize(HWND hwnd, int width, int height)
 
 void Graphics::RenderFrame()
 {
-	float bgcolor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	float bgcolor[] = { 0.04f, 0.04f, 0.04f, 1.0f };
 	this->deviceContext->ClearRenderTargetView(this->renderTargetView.Get(), bgcolor);
 	this->deviceContext->ClearDepthStencilView(this->depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	
@@ -32,11 +32,11 @@ void Graphics::RenderFrame()
 	//Scene에있는 도형 그리기
 	this->deviceContext->PSSetShaderResources(0, 1, this->myTexture.GetAddressOf());
 	this->deviceContext->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), &stride, &offset);
-	this->deviceContext->Draw(3, 0);
+	this->deviceContext->Draw(6, 0);
 	
 	//Draw Text
 	spriteBatch->Begin();
-	spriteFont->DrawString(spriteBatch.get(), L"HELLO FUCKING WORLD", DirectX::XMFLOAT2(0, 0), DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(1.0f, 1.0f));
+	spriteFont->DrawString(spriteBatch.get(), L"DAYBREAK FRONTLINE", DirectX::XMFLOAT2(250, 100), DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(1.0f, 1.0f));
 	spriteBatch->End();
 	this->swapchain->Present(1, NULL);
 
@@ -224,9 +224,12 @@ bool Graphics::InitializeScene()
 {
 	Vertex v[] =
 	{
-		Vertex(-0.5f, -0.5f, 1.0f,0,1), //Bottom Left 
-		Vertex(0.0f, 0.5f, 1.0f,0.5,0), //Top Middle
-		Vertex(0.5f, -0.5f, 1.0f,1,1), //Bottom Right 
+		Vertex(-0.5f, -0.5f, 1.0f,0,1), 
+		Vertex(-0.5f, 0.5f, 1.0f,0,0), 
+		Vertex(0.5f, 0.5f, 1.0f,1,0), 
+		Vertex(0.5f, 0.5f, 1.0f,1,0),
+		Vertex(0.5f, -0.5f, 1.0f,1,1), 
+		Vertex(-0.5f, -0.5f, 1.0f,0,1),
 	};
 
 	D3D11_BUFFER_DESC vertexBufferDesc;
