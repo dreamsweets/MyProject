@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameObject\GameObject.cpp" />
     <ClCompile Include="Graphics\AdapterReader.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="ErrorLogger.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="WindowContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="Graphics\AdapterReader.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="ErrorLogger.h" />

@@ -31,6 +31,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header\GameObject">
+      <UniqueIdentifier>{1ac53fe1-04a0-4390-83b4-177865720034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameObject">
+      <UniqueIdentifier>{cb78d87f-e0a7-4507-aaec-63f55d2ee3ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -72,6 +78,9 @@
     <ClCompile Include="Graphics\Shaders.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\GameObject.cpp">
+      <Filter>Source\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StringConverter.h">
@@ -112,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="Graphics\Shaders.h">
       <Filter>Header\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\GameObject.h">
+      <Filter>Header\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
