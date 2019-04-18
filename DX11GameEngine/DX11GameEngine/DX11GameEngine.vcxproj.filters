@@ -125,6 +125,9 @@
     <ClInclude Include="GameObject\GameObject.h">
       <Filter>Header\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\VertexBuffer.h">
+      <Filter>Header\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="vertexshader.hlsl">
