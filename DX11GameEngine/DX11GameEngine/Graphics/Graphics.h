@@ -9,7 +9,7 @@
 #include "IndexBuffer.h"
 #include "ConstantBufferTypes.h"
 #include "ConstantBuffer.h"
-
+#include "Camera.h"
 
 class Graphics
 {
@@ -48,4 +48,6 @@ private:
 
 	int windowWidth = 0;
 	int windowHeight = 0;
+
+	Camera camera;
 };
