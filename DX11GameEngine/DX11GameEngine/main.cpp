@@ -12,7 +12,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		return -1;
 	}
 	Engine engine;
-	if (engine.Initialize(hInstance, "Title", "Game Engine", 800, 600))
+	if (engine.Initialize(hInstance, "Title", "Game Engine", 1280, 720))
 	{
 		while (engine.ProcessMessages() == true)
 		{
