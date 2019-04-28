@@ -34,7 +34,6 @@ void Graphics::RenderFrame()
 	//상수 버퍼 업데이트
 	DirectX::XMMATRIX world = DirectX::XMMatrixIdentity();
 	
-	camera.AdjustPosition(0.0f, 0.01f, 0.0f);
 	constantBuffer.data.mat = world * camera.GetViewMatrix() * camera.GetProjectionMatrix();
 	constantBuffer.data.mat = DirectX::XMMatrixTranspose(constantBuffer.data.mat);
 	if (!constantBuffer.ApplyChanges())
