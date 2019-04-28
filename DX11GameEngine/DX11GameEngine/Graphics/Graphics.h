@@ -10,6 +10,7 @@
 #include "ConstantBufferTypes.h"
 #include "ConstantBuffer.h"
 #include "Camera.h"
+#include "../Timer.h"
 
 class Graphics
 {
@@ -49,4 +50,5 @@ private:
 
 	int windowWidth = 0;
 	int windowHeight = 0;
+	Timer fpsTimer;
 };
