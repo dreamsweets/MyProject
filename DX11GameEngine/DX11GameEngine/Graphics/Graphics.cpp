@@ -41,8 +41,8 @@ void Graphics::RenderFrame()
 	UINT offset = 0;
 	
 	//상수 버퍼 업데이트
-	DirectX::XMMATRIX world = DirectX::XMMatrixIdentity();
-	
+	static float translationOffset[3] = { 0,0,0 };
+	DirectX::XMMATRIX world = XMMatrixTranslation(translationOffset[0], translationOffset[1], translationOffset[2]);
 	constantBuffer.data.mat = world * camera.GetViewMatrix() * camera.GetProjectionMatrix();
 	constantBuffer.data.mat = DirectX::XMMatrixTranspose(constantBuffer.data.mat);
 	if (!constantBuffer.ApplyChanges())
@@ -69,11 +69,19 @@ void Graphics::RenderFrame()
 	spriteFont->DrawString(spriteBatch.get(), StringConverter::StringToWide(fpsString).c_str(), DirectX::XMFLOAT2(0,0), DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(1.0f, 1.0f));
 	spriteBatch->End();
 
+	static int counter = 0;
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 	//imGui Test Window
 	ImGui::Begin("Test");
+	ImGui::Text("This is example text.");
+	if (ImGui::Button("CLICK ME!"))
+		counter += 1;
+	ImGui::SameLine();
+	std::string clockCount = "Click Count : " + std::to_string(counter);
+	ImGui::Text(clockCount.c_str());
+	ImGui::DragFloat3("Translation X/Y/Z", translationOffset, 0.1f, -5.0f, 5.0f);
 	ImGui::End();
 	//Assemble Draw Data
 	ImGui::Render();
