@@ -108,6 +108,9 @@
     <ClCompile Include="Graphics\ImGui\imgui.cpp">
       <Filter>Source\Graphics\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Model.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StringConverter.h">
@@ -196,6 +199,12 @@
     </ClInclude>
     <ClInclude Include="Graphics\ImGui\imstb_truetype.h">
       <Filter>Header\Graphics\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="COMException.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Model.h">
+      <Filter>Header\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
