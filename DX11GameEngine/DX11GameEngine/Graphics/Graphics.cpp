@@ -30,7 +30,7 @@ bool Graphics::Initialize(HWND hwnd, int width, int height)
 
 void Graphics::RenderFrame()
 {
-	float bgcolor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	float bgcolor[] = { 0.2f, 0.2f, 0.2f, 1.0f };
 	this->deviceContext->ClearRenderTargetView(this->renderTargetView.Get(), bgcolor);
 	this->deviceContext->ClearDepthStencilView(this->depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	
@@ -231,7 +231,7 @@ bool Graphics::InitializeScene()
 	{
 
 		//Load Texture
-		HRESULT hr = DirectX::CreateWICTextureFromFile(this->device.Get(), L"Data\\Textures\\grass_straw.jpg", nullptr, grassTexture.GetAddressOf());
+		HRESULT hr = DirectX::CreateWICTextureFromFile(this->device.Get(), L"Data\\Model\\MyHouse_Diffuse.png", nullptr, grassTexture.GetAddressOf());
 		COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
 
 		hr = DirectX::CreateWICTextureFromFile(this->device.Get(), L"Data\\Textures\\mytexture.jpg", nullptr, pinkTexture.GetAddressOf());
@@ -245,7 +245,7 @@ bool Graphics::InitializeScene()
 		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
 
 		//Initialize Models
-		if (!model.Initialize(this->device.Get(), this->deviceContext.Get(), this->grassTexture.Get(), cb_vs_vertexshader))
+		if (!model.Initialize("Data\\Model\\MyHouse.FBX", this->device.Get(), this->deviceContext.Get(), this->grassTexture.Get(), cb_vs_vertexshader))
 			return false;
 
 		camera.SetPosition(0.0f, 0.0f, -2.0f);
